@@ -1,0 +1,17 @@
+services:
+  - type: web
+    name: tcms-tonga
+    runtime: python
+    buildCommand: |
+      pip install -r backend/requirements.txt
+      cd frontend && npm install && npm run build
+    startCommand: bash start.sh
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.11.0
+      - key: DB_PATH
+        value: /opt/render/project/src/tcms.db
+    disk:
+      name: tcms-data
+      mountPath: /opt/render/project/src
+      sizeGB: 1
